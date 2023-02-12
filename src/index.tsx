@@ -5,6 +5,7 @@ import { ChakraBaseProvider } from '@chakra-ui/react';
 
 import { store } from './app/store';
 import App from './App';
+import { AppTheme } from './theme';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -12,7 +13,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ChakraBaseProvider>
+      <ChakraBaseProvider theme={AppTheme}>
         <App />
       </ChakraBaseProvider>
     </Provider>

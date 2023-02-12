@@ -1,9 +1,9 @@
-import { extendBaseTheme } from "@chakra-ui/react";
+import { extendBaseTheme, extendTheme } from "@chakra-ui/react";
 import { ComponentStyleConfig } from '@chakra-ui/react'
 
-import chakraTheme, { ThemeComponentProps} from '@chakra-ui/theme';
+import chakraTheme from '@chakra-ui/theme';
 
-// const { Button } = chakraTheme.components;
+const { Input } = chakraTheme.components;
 
 const Button= {
     baseStyle: {
@@ -26,8 +26,30 @@ const Button= {
 }
 
 
-export const theme = extendBaseTheme({
+const Text = {
+    baseStyle: {
+        textColor: "#fff",
+        color: '#000'
+    },
+    variants: {
+        header1: {
+            fontSize: '18px',
+            fontWeight: 600,
+        },
+        header2: {
+            fontSize: '14px',
+            fontWeight: 500
+        }
+    },
+    defaultProps: {
+        variant: 'header1'
+    }
+}
+
+export const AppTheme = extendBaseTheme({
     components: {
-        Button
+        Button,
+        Input,
+        Text
     }
 })
