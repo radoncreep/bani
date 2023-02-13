@@ -14,6 +14,7 @@ import {
     Text, 
     VStack 
 } from "@chakra-ui/layout";
+import { CustomerForm } from "./components/CustomerForm";
 
 
 import { PaymentDescription } from "./components/DescriptionCard";
@@ -31,8 +32,10 @@ export const Payment = () => {
                 gap={4} 
             >
                 <GridItem>
-                    <VStack align="flex-start">
+                    <VStack align="stretch" spacing="10">
                         <PaymentDescription />
+
+                        <CustomerForm />
                     </VStack>
                 </GridItem>
                 

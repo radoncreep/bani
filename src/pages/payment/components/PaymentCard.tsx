@@ -21,6 +21,12 @@ import { Card, CardBody, CardFooter, CardHeader } from "@chakra-ui/card";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 
 
+declare global {
+    interface Window {
+      BaniPopUp: () => any;
+    }
+}
+
 type ReducerAction = {
     type: "ADD" | "MINUS",
 }
@@ -113,14 +119,15 @@ export const PaymentCard = () => {
                 </VStack>
             </CardBody>
 
-            <CardFooter py="4">
+            <CardFooter py="6">
                 <Button 
                     bgColor="#5444F2"
                     variant="filled"
                     width="100%"
                     onSubmit={() => console.log("paid")}
-                    py="2"
-                    borderRadius="4"
+                    onClick={() => window.BaniPopUp()}
+                    py="2.5"
+                    borderRadius="6"
                     color="#fff"
                 >
                     Pay ({(quantity * 1000).toLocaleString()})
