@@ -31,7 +31,7 @@ export const paymentSlice = createSlice({
     name: "payment", 
     initialState,
     reducers: {
-        // storePayment: (state, ) 
+        // 
     }, 
     extraReducers: (builder) => {
         builder
