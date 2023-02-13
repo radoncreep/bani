@@ -1,8 +1,5 @@
 import { 
     Box, 
-    Center, 
-    Container, 
-    Divider, 
     Flex, 
     HStack, 
     Link, 
@@ -14,16 +11,24 @@ import {
 } from "@chakra-ui/layout";
 import { Card, CardBody, CardFooter, } from "@chakra-ui/card";
 import { Image } from "@chakra-ui/image";
-import { AiFillTwitterCircle, AiOutlineWhatsApp } from 'react-icons/ai';
-import { GrFacebookOption } from 'react-icons/gr';
 
 import BillingIcon from "../../../assets/blilingIcon.png";
 import { useAppSelector } from "../../../app/hooks";
 import { selectPaymentValue } from "../../../features/payment/paymentSlice";
+import { APP_CONSTANTS } from "../../../constants";
+import { AppIcon } from "../../../components/AppIcon";
 
 
 export const PaymentDescription = () => {
     const paymentData = useAppSelector(selectPaymentValue);
+    const icons = APP_CONSTANTS.ICONS;
+
+    const socialIcons = [
+        { name: "instagram", source: icons.instagram, target: paymentData?.page_instagram_handle },
+        { name: "twitter", source: icons.twitter, target: paymentData?.page_twitter_handle },
+        { name: "facebook", source: icons.facebook, target: paymentData?.page_fb_handle },
+        { name: "whatsapp", source: icons.whatsapp, target: paymentData?.page_whatsapp_phone },
+    ]
     
     return (
         <Card
@@ -76,10 +81,15 @@ export const PaymentDescription = () => {
                 </CardBody>
 
                 <CardFooter py="4">
-                    <HStack spacing={1}>
-                        <AiFillTwitterCircle size={24} />
-                        <AiOutlineWhatsApp size={24} />
-                        <GrFacebookOption  size={24} />
+                    <HStack spacing={2}>
+                        {socialIcons.map((icon, index) => (
+                            <Link key={icon.name + index}>
+                                <AppIcon 
+                                    imageSource={icon.source}
+                                    targetUrl={icon.target}
+                                />
+                            </Link>
+                        ))}
                     </HStack>
                 </CardFooter>
             </Stack>
