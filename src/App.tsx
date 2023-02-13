@@ -1,10 +1,22 @@
-import { Button } from '@chakra-ui/react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate
+} from "react-router-dom";
 
 import { Payment } from './pages/payment/Payment';
 
 function App() {
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Payment />   
+    },
+  ],
+  )
   return (
-    <Payment />
+    <RouterProvider router={router}/>
   );
 }
 
