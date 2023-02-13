@@ -92,9 +92,17 @@ export const PaymentCard = () => {
                             borderRadius="4"
                         />
 
-                        <Circle bgColor="#5444F2" p="2">
+                        <Circle 
+                            // bgColor=
+                            style={{
+                                backgroundColor: quantity > 1 ? "#5444F2" : "grey",
+                                opacity: quantity > 1 ? 1 : 0.4
+                            }}
+                            p="2"
+                        >
                             <Button 
                                 disabled={quantity === 1}
+                                bgColor={quantity === 1 ? "grey" : undefined}
                                 onClick={() => dispatch({ type: "MINUS" })}
                                 variant="unstyled"
                             >

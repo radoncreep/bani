@@ -1,27 +1,27 @@
+import { useEffect } from "react";
 import { 
-    Box, 
     Center, 
-    Container, 
-    Divider, 
-    Flex, 
     Grid, 
     GridItem, 
-    HStack, 
-    Link, 
-    Spacer, 
-    Stack, 
-    StackDivider, 
-    Text, 
     VStack 
 } from "@chakra-ui/layout";
+
 import { CustomerForm } from "./components/CustomerForm";
-
-
 import { PaymentDescription } from "./components/DescriptionCard";
 import { PaymentCard } from "./components/PaymentCard";
+import { fetchPayment, selectPaymentValue } from "../../features/payment/paymentSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 
 export const Payment = () => {
+    const page_ref = "donate-vera-wangg";
+    const paymentData = useAppSelector(selectPaymentValue);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(fetchPayment(page_ref));
+    }, []);
+    
     return (
         <Center 
             backgroundColor="#ECEBF4" 

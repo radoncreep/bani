@@ -18,9 +18,12 @@ import { AiFillTwitterCircle, AiOutlineWhatsApp } from 'react-icons/ai';
 import { GrFacebookOption } from 'react-icons/gr';
 
 import BillingIcon from "../../../assets/blilingIcon.png";
+import { useAppSelector } from "../../../app/hooks";
+import { selectPaymentValue } from "../../../features/payment/paymentSlice";
 
 
 export const PaymentDescription = () => {
+    const paymentData = useAppSelector(selectPaymentValue);
     
     return (
         <Card
@@ -61,9 +64,11 @@ export const PaymentDescription = () => {
                                 </Text>
 
                                 <Text fontSize='16px' color='#000' fontWeight='500'>
-                                    Lorem ipsum dolor sit amet consectetur. Posuere elementum
-                                    adipiscing a tincidunt in et nisi malesuada. Tellus nunc nibh 
-                                    tincidunt tristique pellentesque nulla morbi tortor.
+                                    {
+                                        paymentData ? paymentData.page_description : 
+                                        `Lorem ipsum dolor sit amet consectetur. Posuere elementumadipiscing a tincidunt in et nisi malesuada. 
+                                        Tellus nunc nibh tincidunt tristique pellentesque nulla morbi tortor.`
+                                    }
                                 </Text>
                             </VStack>                                   
                         </Flex>
