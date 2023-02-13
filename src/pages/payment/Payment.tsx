@@ -4,6 +4,8 @@ import {
     Container, 
     Divider, 
     Flex, 
+    Grid, 
+    GridItem, 
     HStack, 
     Link, 
     Spacer, 
@@ -12,17 +14,35 @@ import {
     Text, 
     VStack 
 } from "@chakra-ui/layout";
-import { Card, CardHeader, CardBody, CardFooter, } from "@chakra-ui/card";
-import { Image } from "@chakra-ui/image";
-import { AiFillTwitterCircle, AiOutlineWhatsApp } from 'react-icons/ai';
-import { GrFacebookOption } from 'react-icons/gr';
+import { CustomerForm } from "./components/CustomerForm";
 
-import BillingIcon from "../assets/blilingIcon.png";
+
 import { PaymentDescription } from "./components/DescriptionCard";
+import { PaymentCard } from "./components/PaymentCard";
 
 
 export const Payment = () => {
     return (
-        <PaymentDescription />
+        <Center 
+            backgroundColor="#ECEBF4" 
+            height='100vh'
+        >
+            <Grid 
+                templateColumns='repeat(2, 1fr)' 
+                gap={4} 
+            >
+                <GridItem>
+                    <VStack align="stretch" spacing="10">
+                        <PaymentDescription />
+
+                        <CustomerForm />
+                    </VStack>
+                </GridItem>
+                
+                <GridItem>
+                    <PaymentCard />
+                </GridItem>
+            </Grid>
+        </Center>
     )
 }
