@@ -1,16 +1,9 @@
-import { useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { 
-    Box, 
-    Center, 
     Circle, 
-    Container, 
     Divider, 
     Flex, 
     HStack, 
-    Link, 
-    Spacer, 
-    Stack, 
-    StackDivider, 
     Text, 
     VStack 
 } from "@chakra-ui/layout";
@@ -19,6 +12,8 @@ import { Button } from "@chakra-ui/button";
 import { Card, CardBody, CardFooter, CardHeader } from "@chakra-ui/card";
 
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import { selectPaymentValue } from "../../../features/payment/paymentSlice";
+import { useAppSelector } from "../../../app/hooks";
 
 
 declare global {
@@ -46,6 +41,21 @@ const quantityReducer = (state=intialQty, action: ReducerAction) => {
 
 export const PaymentCard = () => {
     const [quantity, dispatch] = useReducer(quantityReducer, intialQty);
+
+    const paymentData = useAppSelector(selectPaymentValue);
+
+    const [paymentType, setPaymentType] = useState<"fixed" | "dynamic" | null>(null);
+
+    useEffect(() => {
+        if (paymentData) {
+            let pageAmount = parseInt(paymentData.page_amount);
+            if (pageAmount > 0) {
+                setPaymentType("fixed");
+            } else if(pageAmount === 0) {
+                setPaymentType("dynamic");
+            }
+        }
+    }, [paymentData])
 
     return (
         <Card
@@ -112,11 +122,11 @@ export const PaymentCard = () => {
                     </HStack>
                 </Flex>
                 
-                <VStack spacing="2" align="flex-start">
+                { paymentType === "fixed" && <VStack spacing="2" align="flex-start">
                     <Text mb='8px' variant="header2">Total</Text>
 
                     <InputGroup>
-                        <InputLeftAddon children='NGN' />
+                        <InputLeftAddon children={paymentData?.page_currency} />
                         <Input 
                             width="100%" 
                             type='number' 
@@ -124,7 +134,8 @@ export const PaymentCard = () => {
                             textAlign="right"
                         />
                     </InputGroup>
-                </VStack>
+                </VStack>   
+                }
             </CardBody>
 
             <CardFooter py="6">
